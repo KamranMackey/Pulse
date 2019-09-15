@@ -1,7 +1,6 @@
 package com.kamranmackey.pulse
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.kamranmackey.MainFragment
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
@@ -21,16 +20,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbarTitle.setOnLongClickListener { toast("Hello Long Click") }
         binding.searchAction.setOnClickListener { toast("Hello Search") }
-        binding.overflowMenu.setOnClickListener { popup(binding.overflowMenu, R.menu.menu_main)}
+        binding.overflow.setOnClickListener { popup(binding.overflow, R.menu.menu_main)}
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
-    }
-
-    private fun showOverflow(view: View) {
-
     }
 }
