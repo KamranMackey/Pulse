@@ -15,16 +15,6 @@
         android:layout_alignParentTop="true"
         android:elevation="0dp">
 
-        <ImageView
-            android:id="@+id/search_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_margin="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/search_icon_desc"
-            android:src="@drawable/ic_search" />
-
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
@@ -35,14 +25,23 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
         <ImageView
-            android:id="@+id/settings_action"
+            android:id="@+id/overflow_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_margin="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/settings_icon_desc"
-            android:src="@drawable/ic_settings" />
+            android:contentDescription="@string/overflow_icon_desc"
+            android:src="@drawable/ic_elipsis" />
+
+        <ImageView
+            android:id="@+id/search_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/search_icon_desc"
+            android:src="@drawable/ic_search" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
