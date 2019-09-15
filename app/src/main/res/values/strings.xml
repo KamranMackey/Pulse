@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Pulse</string>
+    <string name="search_icon_desc">Search</string>
+    <string name="settings_icon_desc">Settings</string>
+</resources>
