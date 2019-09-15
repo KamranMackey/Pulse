@@ -1,9 +1,8 @@
-package com.kamranmackey
+package com.kamranmackey.pulse
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import com.kamranmackey.pulse.R
 
 class MainFragment : Fragment() {
 

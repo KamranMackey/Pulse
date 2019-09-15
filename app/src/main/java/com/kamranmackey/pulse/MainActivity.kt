@@ -2,7 +2,6 @@ package com.kamranmackey.pulse
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kamranmackey.MainFragment
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
 import com.kamranmackey.pulse.utils.extensions.Context.popup
 import com.kamranmackey.pulse.utils.extensions.Context.toast
