@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_margin="16dp"
-            android:contentDescription="@string/search_icon_desc"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/search_icon_desc"
             android:src="@drawable/ic_search" />
 
         <TextView
@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
@@ -39,10 +40,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_margin="16dp"
-            android:contentDescription="@string/settings_icon_desc"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/settings_icon_desc"
             android:src="@drawable/ic_settings" />
-
     </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@+id/toolbar" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>
