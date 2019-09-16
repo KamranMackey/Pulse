@@ -3,8 +3,7 @@ package com.kamranmackey.pulse
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
-import com.kamranmackey.pulse.utils.extensions.Context.popup
-import com.kamranmackey.pulse.utils.extensions.Context.toast
+import com.kamranmackey.pulse.utils.extensions.showToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        binding.toolbarTitle.setOnLongClickListener { toast("Hello Long Click") }
-        binding.searchAction.setOnClickListener { toast("Hello Search") }
-        binding.overflow.setOnClickListener { popup(binding.overflow, R.menu.menu_main)}
+        binding.account.setOnClickListener { showToast("Hello Account") }
+        binding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
+        binding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

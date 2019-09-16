@@ -12,36 +12,25 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:elevation="0dp">
+        android:layout_alignParentTop="true">
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
         <ImageView
-            android:id="@+id/overflow"
+            android:id="@+id/account"
+            android:src="@drawable/ic_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/overflow_icon_desc"
-            android:src="@drawable/ic_elipsis" />
+            android:layout_gravity="start"
+            android:contentDescription="@string/action_account_desc"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
-        <ImageView
-            android:id="@+id/search_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/search_icon_desc"
-            android:src="@drawable/ic_search" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -58,6 +47,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/black"
+        app:itemBackground="?attr/selectableItemBackgroundBorderless"
         app:itemTextColor="@color/black"
         app:menu="@menu/bottom_navigation_menu" />
 
