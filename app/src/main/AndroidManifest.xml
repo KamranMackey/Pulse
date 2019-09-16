@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Light"
         tools:ignore="AllowBackup">
-        <activity android:name="MainActivity"
-            android:screenOrientation="sensor">
+        <activity
+            android:name="MainActivity"
+            android:screenOrientation="fullUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

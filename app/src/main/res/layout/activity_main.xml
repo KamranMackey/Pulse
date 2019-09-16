@@ -24,12 +24,12 @@
 
         <ImageView
             android:id="@+id/account"
-            android:src="@drawable/ic_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/action_account_desc"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:src="@drawable/ic_person" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        app:itemIconTint="@color/black"
         app:itemBackground="?attr/selectableItemBackgroundBorderless"
+        app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:menu="@menu/bottom_navigation_menu" />
 

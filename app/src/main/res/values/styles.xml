@@ -7,7 +7,7 @@
         <!-- Material Dialogs -->
         <item name="md_color_button_text">@color/colorAccent</item>
         <item name="md_button_casing">literal</item>
-        <item name="md_corner_radius">16dp</item>
+        <item name="md_corner_radius">8dp</item>
         <item name="md_ripple_color">#81D4FA</item>
         <!-- Navigation / Status -->
         <item name="android:windowLightStatusBar">true</item>

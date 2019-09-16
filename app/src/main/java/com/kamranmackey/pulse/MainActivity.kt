@@ -1,6 +1,9 @@
 package com.kamranmackey.pulse
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
 import com.kamranmackey.pulse.utils.extensions.showToast
