@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.kamranmackey.pulse.R
 
@@ -17,7 +19,7 @@ class AboutDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(R.string.about_dialog_title)
             message(R.string.about_dialog_body) {
                 html()
