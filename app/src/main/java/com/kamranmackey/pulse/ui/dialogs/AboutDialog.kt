@@ -4,7 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.LayoutMode.WRAP_CONTENT
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.callbacks.onDismiss
@@ -15,11 +15,12 @@ class AboutDialog : DialogFragment() {
     companion object {
         private const val tag = "AboutDialog"
 
-        fun show(activity: FragmentActivity) = AboutDialog().show(activity.supportFragmentManager, tag)
+        fun show(activity: FragmentActivity) =
+            AboutDialog().show(activity.supportFragmentManager, tag)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        return MaterialDialog(activity!!, BottomSheet(WRAP_CONTENT)).show {
             title(R.string.about_dialog_title)
             message(R.string.about_dialog_body) {
                 html()
