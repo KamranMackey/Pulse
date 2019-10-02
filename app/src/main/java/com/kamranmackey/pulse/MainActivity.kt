@@ -1,11 +1,19 @@
 package com.kamranmackey.pulse
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
+import com.kamranmackey.pulse.ui.fragments.SongsFragment
+import com.kamranmackey.pulse.ui.fragments.SearchFragment
+import com.kamranmackey.pulse.ui.fragments.SettingsFragment
 import com.kamranmackey.pulse.utils.extensions.showToast
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -16,14 +24,46 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        navigation.setOnNavigationItemSelectedListener(this)
+
         binding.account.setOnClickListener { showToast("Hello Account") }
+        binding.toolbarTitle.text = getString(R.string.action_home)
         binding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
         binding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, SongsFragment())
                 .commitNow()
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_home -> {
+                toolbar_title.text = getString(R.string.action_home)
+                loadFragment(SongsFragment())
+                return true
+            }
+            R.id.action_settings -> {
+                toolbar_title.text = getString(R.string.action_settings)
+                loadFragment(SettingsFragment())
+                return true
+            }
+            R.id.action_search -> {
+                toolbar_title.text = getString(R.string.action_search)
+                loadFragment(SearchFragment())
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
