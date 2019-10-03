@@ -3,9 +3,14 @@ package com.kamranmackey.pulse.ui.fragments
 import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
+import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -31,6 +36,8 @@ class SongsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: SongAdapter
     private lateinit var mContext: Context
+    private lateinit var mVibrator: Vibrator
+    private lateinit var mPlayer: MediaPlayer
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -44,7 +51,9 @@ class SongsFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerView)
         mAdapter = SongAdapter(songList)
-        mContext = baseActivity // just get the base activity's context instance
+        mContext = baseActivity
+        mVibrator = mContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        mPlayer = MediaPlayer()
 
         val layoutManager: LayoutManager = LinearLayoutManager(mContext)
 
@@ -58,11 +67,25 @@ class SongsFragment : Fragment() {
             override fun onClick(view: View, position: Int) {
                 val title: String = songList[position].title
                 val artist: String = songList[position].artist
+                val path: String = songList[position].path
+
                 Toast.makeText(baseActivity, "$title by $artist selected!", Toast.LENGTH_SHORT).show()
+
+                mPlayer.reset()
+                mPlayer.setDataSource(path)
+                mPlayer.prepare()
+                mPlayer.start()
             }
             override fun onLongClick(view: View?, position: Int) {
                 val title: String = songList[position].title
                 val artist: String = songList[position].artist
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    mVibrator.vibrate(VibrationEffect.createOneShot(5, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    mVibrator.vibrate(5)
+                }
+
                 Toast.makeText(baseActivity, "$title by $artist long clicked", Toast.LENGTH_SHORT).show()
             }
         }))
@@ -100,15 +123,19 @@ class SongsFragment : Fragment() {
             val title: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
             val artist: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
             val album: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
+            val track: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK)
             val year: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR)
+            val path: Int = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
 
             do {
                 val currentId: Long = cursor.getLong(id)
                 val currentTitle: String = cursor.getString(title)
                 val currentArtist: String = cursor.getString(artist)
                 val currentAlbum: String = cursor.getString(album)
+                val currentTrack: Int = cursor.getInt(track)
                 val currentYear: Int = cursor.getInt(year)
-                songList.add(Song(currentId, currentTitle, currentArtist, currentAlbum, currentYear))
+                val currentPath: String = cursor.getString(path)
+                songList.add(Song(currentId, currentTitle, currentArtist, currentTrack, currentAlbum, currentYear, currentPath))
             } while (cursor.moveToNext())
 
             cursor.close()
