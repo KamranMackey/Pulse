@@ -1,11 +1,11 @@
 package com.kamranmackey.pulse.ui.fragments
 
 import android.content.ContentResolver
+import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -30,6 +30,7 @@ class SongsFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: SongAdapter
+    private lateinit var mContext: Context
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -43,16 +44,17 @@ class SongsFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerView)
         mAdapter = SongAdapter(songList)
+        mContext = baseActivity // just get the base activity's context instance
 
-        val layoutManager: LayoutManager = LinearLayoutManager(baseActivity)
+        val layoutManager: LayoutManager = LinearLayoutManager(mContext)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.setHasFixedSize(true)
         recyclerView.isNestedScrollingEnabled = false;
-        recyclerView.addItemDecoration(DividerItemDecoration(baseActivity, LinearLayoutManager.VERTICAL))
+        recyclerView.addItemDecoration(DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL))
         recyclerView.adapter = mAdapter
-        recyclerView.addOnItemTouchListener(OnTouchListener(baseActivity, recyclerView, object : OnTouchListener.ClickListener {
+        recyclerView.addOnItemTouchListener(OnTouchListener(mContext, recyclerView, object : OnTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {
                 val title: String = songList[position].title
                 val artist: String = songList[position].artist
