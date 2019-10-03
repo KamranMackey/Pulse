@@ -54,6 +54,7 @@
         app:itemBackground="?attr/selectableItemBackgroundBorderless"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
+        app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
