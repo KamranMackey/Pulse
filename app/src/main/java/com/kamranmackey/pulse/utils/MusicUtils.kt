@@ -1,8 +1,15 @@
 package com.kamranmackey.pulse.utils
 
+import android.content.ContentUris
+import android.net.Uri
 import java.util.*
 
 object MusicUtils {
+
+    fun getAlbumArtFromMediaStore(albumId: Long): Uri {
+        val artworkUri: Uri = Uri.parse("content://media/external/audio/albumart")
+        return ContentUris.withAppendedId(artworkUri, albumId)
+    }
 
     fun getSongDuration(songDurationMillis: Int): String {
         var minutes = songDurationMillis / 1000 / 60

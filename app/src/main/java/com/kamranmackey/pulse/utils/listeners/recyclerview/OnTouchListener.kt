@@ -2,6 +2,7 @@ package com.kamranmackey.pulse.utils.listeners.recyclerview
 
 import android.content.Context
 import android.view.GestureDetector
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 
@@ -23,6 +24,7 @@ class OnTouchListener(context: Context,
                 if (child != null && clickListener != null) {
                     val position = recyclerView.getChildAdapterPosition(child)
                     clickListener.onLongClick(child, position)
+                    recyclerView.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 }
             }
         })
