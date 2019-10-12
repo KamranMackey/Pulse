@@ -1,7 +1,9 @@
 package com.kamranmackey.pulse.ui.fragments
 
+import android.Manifest
 import android.content.ContentResolver
 import android.content.Context
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.media.MediaPlayer
 import android.net.Uri
@@ -9,8 +11,10 @@ import android.os.*
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.view.*
+import androidx.core.app.ActivityCompat
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,8 +37,7 @@ class SongsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: SongAdapter
     private lateinit var mContext: Context
-    private lateinit var mVibrator: Vibrator
-    private lateinit var mPlayer: MediaPlayer
+    private lateinit var mManager: FragmentManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,11 +51,11 @@ class SongsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mManager = fragmentManager!!
+
         recyclerView = view.findViewById(R.id.recyclerView)
-        mAdapter = SongAdapter(songList)
+        mAdapter = SongAdapter(songList, mManager)
         mContext = baseActivity
-        mVibrator = mContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        mPlayer = MediaPlayer()
 
         val layoutManager: LayoutManager = LinearLayoutManager(mContext)
 
@@ -60,12 +63,6 @@ class SongsFragment : Fragment() {
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.setHasFixedSize(true)
         recyclerView.isNestedScrollingEnabled = false
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                mContext,
-                LinearLayoutManager.VERTICAL
-            )
-        )
         recyclerView.adapter = mAdapter
 
         getSongData()

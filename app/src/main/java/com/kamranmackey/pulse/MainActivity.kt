@@ -1,8 +1,12 @@
 package com.kamranmackey.pulse
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,7 +31,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(this)
 
-        binding.account.setOnClickListener { showToast("Hello Account") }
         binding.toolbarTitle.text = getString(R.string.action_home)
         binding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
         binding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }

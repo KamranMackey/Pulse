@@ -14,6 +14,14 @@
    ]]></string>
     <string name="about_dialog_dismiss">Dismiss</string>
 
+    <string name="label_bit_rate">Bitrate</string>
+    <string name="label_file_format">Format</string>
+    <string name="label_file_name">File name</string>
+    <string name="label_file_path">File path</string>
+    <string name="label_file_size">Size</string>
+    <string name="label_sampling_rate">Sampling rate</string>
+    <string name="label_track_length">Length</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Preference Titles -->

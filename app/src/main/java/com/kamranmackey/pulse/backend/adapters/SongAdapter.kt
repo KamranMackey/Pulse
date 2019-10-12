@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamranmackey.pulse.R
 import com.kamranmackey.pulse.backend.models.Song
+import com.kamranmackey.pulse.ui.dialogs.SongDetailDialog
 
-class SongAdapter(private val songList: List<Song>) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(private val songList: List<Song>,
+                  private val fm: FragmentManager) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
     private lateinit var mPlayer: MediaPlayer
 
@@ -27,14 +30,14 @@ class SongAdapter(private val songList: List<Song>) : RecyclerView.Adapter<SongA
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.song_list_row, parent, false)
 
+        mPlayer = MediaPlayer()
+
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val song = songList[position]
         val string = SpannableStringBuilder()
-
-        mPlayer = MediaPlayer()
 
         val title = song.title
         val artist = song.albumArtist
@@ -45,18 +48,18 @@ class SongAdapter(private val songList: List<Song>) : RecyclerView.Adapter<SongA
 
         holder.title.text = title
         holder.artist.text = string
-        holder.options.setOnClickListener {
+        holder.options.setOnClickListener { it ->
             val menu = PopupMenu(holder.options.context, holder.options)
             menu.inflate(R.menu.menu_song)
             menu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.details -> {
-                        Toast.makeText(holder.options.context, "Song path: $path",
-                            Toast.LENGTH_SHORT).show()
+                        SongDetailDialog.create(song).show(fm, "SONG_DETAILS")
                     }
                 }
                 true
             }
+            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             menu.show()
         }
 
@@ -65,10 +68,11 @@ class SongAdapter(private val songList: List<Song>) : RecyclerView.Adapter<SongA
             mPlayer.setDataSource(path)
             mPlayer.prepare()
             mPlayer.start()
+            Toast.makeText(holder.itemView.context, "${song.title} by ${song.albumArtist} now playing!", Toast.LENGTH_LONG).show()
         }
 
         holder.itemView.setOnLongClickListener {
-            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK):q
+            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         }
     }
 
