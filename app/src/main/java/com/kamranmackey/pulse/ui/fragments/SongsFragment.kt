@@ -51,7 +51,7 @@ class SongsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mManager = fragmentManager!!
+        mManager = fragmentManager as FragmentManager
 
         recyclerView = view.findViewById(R.id.recyclerView)
         mAdapter = SongAdapter(songList, mManager)
