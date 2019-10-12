@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/action_home"
-        android:id="@+id/action_home"
-        android:icon="@drawable/ic_home" />
+    <item android:title="@string/action_songs"
+        android:id="@+id/action_songs"
+        android:icon="@drawable/ic_music_note" />
 
     <item android:title="@string/action_search"
         android:id="@+id/action_search"

@@ -44,7 +44,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/menu_end_padding"
         android:text="@string/vertical_elipsis"
         android:textSize="30sp"
         android:textStyle="bold"

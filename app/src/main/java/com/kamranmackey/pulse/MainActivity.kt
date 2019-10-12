@@ -1,12 +1,8 @@
 package com.kamranmackey.pulse
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(this)
 
-        binding.toolbarTitle.text = getString(R.string.action_home)
+        binding.toolbarTitle.text = getString(R.string.action_songs)
         binding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
         binding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
 
@@ -44,8 +40,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_home -> {
-                toolbar_title.text = getString(R.string.action_home)
+            R.id.action_songs -> {
+                toolbar_title.text = getString(R.string.action_songs)
                 loadFragment(SongsFragment())
                 return true
             }
