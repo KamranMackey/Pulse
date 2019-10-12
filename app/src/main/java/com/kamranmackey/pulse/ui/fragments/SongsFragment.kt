@@ -8,9 +8,7 @@ import android.net.Uri
 import android.os.*
 import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -24,10 +22,6 @@ import com.kamranmackey.pulse.backend.adapters.SongAdapter
 import com.kamranmackey.pulse.backend.models.Song
 import com.kamranmackey.pulse.ui.dialogs.AboutDialog
 import com.kamranmackey.pulse.utils.extensions.baseActivity
-import com.kamranmackey.pulse.utils.listeners.recyclerview.OnTouchListener
-import io.reactivex.Observable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 import java.util.ArrayList
 
@@ -73,40 +67,6 @@ class SongsFragment : Fragment() {
             )
         )
         recyclerView.adapter = mAdapter
-        recyclerView.addOnItemTouchListener(
-            OnTouchListener(
-                mContext,
-                recyclerView,
-                object : OnTouchListener.ClickListener {
-                    override fun onClick(view: View, position: Int) {
-                        val title: String = songList[position].title
-                        val artist: String = songList[position].artist
-                        val path: String = songList[position].path
-
-                        Toast.makeText(
-                            baseActivity,
-                            "$title by $artist selected!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        mPlayer.reset()
-                        mPlayer.setDataSource(path)
-                        mPlayer.prepare()
-                        mPlayer.start()
-                        Log.d("SongFragment", mPlayer.trackInfo.toString())
-                    }
-
-                    override fun onLongClick(view: View?, position: Int) {
-                        val title: String = songList[position].title
-                        val artist: String = songList[position].artist
-                        Toast.makeText(
-                            baseActivity,
-                            "$title by $artist long clicked",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
-        )
 
         getSongData()
     }

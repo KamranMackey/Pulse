@@ -1,27 +1,26 @@
 package com.kamranmackey.pulse.backend.adapters
 
-
-import android.media.MediaMetadataRetriever
+import android.media.MediaPlayer
 import android.text.SpannableStringBuilder
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import com.kamranmackey.pulse.R
 import com.kamranmackey.pulse.backend.models.Song
-import com.kamranmackey.pulse.utils.MusicUtils
 
-class SongAdapter(private val songList: List<Song>) :
-    RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(private val songList: List<Song>) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+
+    private lateinit var mPlayer: MediaPlayer
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var title: TextView = view.findViewById(R.id.title)
         var artist: TextView = view.findViewById(R.id.artist)
-        var year: TextView = view.findViewById(R.id.year)
-        // var art: ImageView = view.findViewById(R.id.thumbnail)
+        var options: TextView = view.findViewById(R.id.songOptions)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,16 +34,42 @@ class SongAdapter(private val songList: List<Song>) :
         val song = songList[position]
         val string = SpannableStringBuilder()
 
+        mPlayer = MediaPlayer()
+
         val title = song.title
         val artist = song.albumArtist
         val album = song.album
-        val year = song.year.toString()
+        val path = song.path
 
         string.append(artist).append(" • ").append(album)
 
         holder.title.text = title
         holder.artist.text = string
-        holder.year.text = year
+        holder.options.setOnClickListener {
+            val menu = PopupMenu(holder.options.context, holder.options)
+            menu.inflate(R.menu.menu_song)
+            menu.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.details -> {
+                        Toast.makeText(holder.options.context, "Song path: $path",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+            menu.show()
+        }
+
+        holder.itemView.setOnClickListener {
+            mPlayer.reset()
+            mPlayer.setDataSource(path)
+            mPlayer.prepare()
+            mPlayer.start()
+        }
+
+        holder.itemView.setOnLongClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK):q
+        }
     }
 
     override fun getItemCount(): Int = songList.size
