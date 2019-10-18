@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.action_songs -> {
                 toolbar_title.text = getString(R.string.action_songs)
-                loadFragment(SongsFragment())
+                loadFragment(SongsFragment.newInstance())
                 return true
             }
             R.id.action_albums -> {

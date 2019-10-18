@@ -38,6 +38,10 @@ class SongsFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var mManager: FragmentManager
 
+    companion object {
+        fun newInstance() = SongsFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
