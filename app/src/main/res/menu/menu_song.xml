@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/details"
-        android:title="@string/menu_song_details" />
+        android:title="@string/title_song_details" />
+
+    <item android:id="@+id/delete_from_device"
+        android:title="@string/title_delete_from_device" />
 
 </menu>

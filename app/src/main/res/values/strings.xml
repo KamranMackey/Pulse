@@ -1,43 +1,48 @@
 <resources>
     <string name="app_name">Pulse</string>
-    <string name="action_account_desc">Account</string>
     <string name="overflow_icon_desc">More</string>
+
     <string name="action_songs">Songs</string>
+    <string name="action_albums">Albums</string>
     <string name="action_search">Search</string>
+    <string name="action_playlists">Playlists</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
 
-    <string name="about_dialog_title">About Pulse</string>
-    <string name="about_dialog_body"><![CDATA[
-    <b>Pulse for Reddit</b> is a fully featured Reddit client for Android.<br><br>
-    Source code is available for view at <a href="https://github.com/KamranMackey/Pulse">GitHub</a>.
-   ]]></string>
-    <string name="about_dialog_dismiss">Dismiss</string>
+    <!-- Menu / Dialog Titles -->
+    <string name="title_song_details">Song details</string>
+    <string name="title_album_details">Album details</string> <!-- For future use. -->
+    <string name="title_delete_from_device">Delete from device</string>
 
-    <string name="label_bit_rate">Bitrate</string>
-    <string name="label_file_format">Format</string>
-    <string name="label_file_name">File name</string>
-    <string name="label_file_path">File path</string>
-    <string name="label_file_size">Size</string>
-    <string name="label_sampling_rate">Sampling rate</string>
-    <string name="label_track_length">Length</string>
+    <!-- File Metadata Labels -->
+    <string name="label_file_name">File Name</string>
+    <string name="label_file_path">File Path</string>
+    <string name="label_file_size">File Size</string>
+    <string name="label_file_channels">File Channels</string>
+    <string name="label_file_bitrate">File Bitrate</string>
+    <string name="label_file_format">File Format</string>
+    <string name="label_file_samplerate">File Sample Rate</string>
+    <string name="label_file_length">File Length</string>
+    <string name="label_file_encoder">File Encoder</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Detail Dialog Headers -->
+    <string name="general_file_details">File Metadata:</string>
+    <string name="advanced_file_details">Song Metadata:</string>
+
+    <!-- Song Metadata Labels -->
+    <string name="label_song_title">Song Title</string>
+    <string name="label_song_artist">Song Artist</string>
+    <string name="label_song_album">Song Album</string>
+    <string name="label_song_year">Song Year</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Preferences -->
+    <string name="audio_header">Audio Settings</string>
+    <string name="gapless_playback_key">gapless_playback</string>
+    <string name="gapless_playback_title">Gapless Playback</string>
+    <string name="gapless_playback_desc">Enable continuous music playback. May cause issues on certain devices.</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="vertical_elipsis">⋮</string>
-    <string name="menu_song_details">Details</string>
+    <string name="album_thumbnail_desc">Album thumbnail</string>
 </resources>

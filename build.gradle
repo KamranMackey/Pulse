@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url  "http://dl.bintray.com/ijabz/maven" }
         
     }
     dependencies {
@@ -20,7 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url  "http://dl.bintray.com/ijabz/maven" }
     }
 }
 

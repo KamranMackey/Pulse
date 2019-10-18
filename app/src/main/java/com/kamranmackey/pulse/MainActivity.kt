@@ -1,5 +1,9 @@
 package com.kamranmackey.pulse
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kamranmackey.pulse.databinding.ActivityMainBinding
+import com.kamranmackey.pulse.ui.fragments.AlbumsFragment
 import com.kamranmackey.pulse.ui.fragments.SongsFragment
 import com.kamranmackey.pulse.ui.fragments.SearchFragment
 import com.kamranmackey.pulse.ui.fragments.SettingsFragment
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        createNotificationChannel() // create Notificaiton channel
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -45,6 +51,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 loadFragment(SongsFragment())
                 return true
             }
+            R.id.action_albums -> {
+                toolbar_title.text = getString(R.string.action_albums)
+                loadFragment(AlbumsFragment.newInstance())
+                return true
+            }
             R.id.action_settings -> {
                 toolbar_title.text = getString(R.string.action_settings)
                 loadFragment(SettingsFragment())
@@ -64,5 +75,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = "Media Playback"
+            val description = "Playback notification used to control the playback of media."
+            val importance: Int = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("com.kamranmackey.pulse.playbackNotification", name, importance)
+            channel.description = description
+            channel.setSound(null, null)
+            channel.enableVibration(false)
+            channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+            val notificationManager: NotificationManager? = getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+        }
     }
 }

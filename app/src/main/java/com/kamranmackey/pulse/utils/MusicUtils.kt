@@ -1,15 +1,20 @@
 package com.kamranmackey.pulse.utils
 
-import android.content.ContentUris
+import android.content.Context
 import android.net.Uri
 import java.util.*
+import android.provider.MediaStore
+import android.graphics.Bitmap
+import androidx.recyclerview.widget.RecyclerView
+import android.content.ContentResolver
+import android.os.Build
+import android.annotation.TargetApi
+import android.graphics.ImageDecoder
+import androidx.annotation.NonNull
+import java.io.IOException
+
 
 object MusicUtils {
-
-    fun getAlbumArtFromMediaStore(albumId: Long): Uri {
-        val artworkUri: Uri = Uri.parse("content://media/external/audio/albumart")
-        return ContentUris.withAppendedId(artworkUri, albumId)
-    }
 
     fun getSongDuration(songDurationMillis: Int): String {
         var minutes = songDurationMillis / 1000 / 60
@@ -21,6 +26,33 @@ object MusicUtils {
             minutes %= 60
             String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds)
         }
+    }
+
+    @Suppress("DEPRECATION")
+    fun getBitmapUri(resolver: ContentResolver, uri: Uri): Bitmap? {
+        val bitmap: Bitmap?
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            return try {
+                bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
+                bitmap
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        } else {
+            return try {
+                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(resolver, uri))
+                bitmap
+            } catch (e: IOException) {
+                e.printStackTrace()
+                null
+            }
+        }
+    }
+
+    fun deleteSongFromDevice(position: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+
     }
 
 }

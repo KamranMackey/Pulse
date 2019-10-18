@@ -5,9 +5,17 @@
         android:id="@+id/action_songs"
         android:icon="@drawable/ic_music_note" />
 
+    <item android:title="@string/action_albums"
+        android:id="@+id/action_albums"
+        android:icon="@drawable/ic_album" />
+
     <item android:title="@string/action_search"
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search" />
+
+    <item android:title="@string/action_playlists"
+        android:id="@+id/action_playlists"
+        android:icon="@drawable/ic_queue_music" />
 
     <item android:title="@string/action_settings"
         android:icon="@drawable/ic_settings"

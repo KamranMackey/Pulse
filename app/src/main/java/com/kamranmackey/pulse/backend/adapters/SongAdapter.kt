@@ -1,5 +1,6 @@
 package com.kamranmackey.pulse.backend.adapters
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.text.SpannableStringBuilder
 import android.view.HapticFeedbackConstants
@@ -8,16 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamranmackey.pulse.R
 import com.kamranmackey.pulse.backend.models.Song
 import com.kamranmackey.pulse.ui.dialogs.SongDetailDialog
+import com.kamranmackey.pulse.utils.extensions.showToast
 
-class SongAdapter(private val songList: List<Song>,
+class SongAdapter(private val songList: ArrayList<Song>,
                   private val fm: FragmentManager) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
+    private lateinit var mContext: Context
     private lateinit var mPlayer: MediaPlayer
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,6 +32,7 @@ class SongAdapter(private val songList: List<Song>,
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.song_list_row, parent, false)
 
+        mContext = parent.context
         mPlayer = MediaPlayer()
 
         return ViewHolder(itemView)
@@ -49,12 +52,15 @@ class SongAdapter(private val songList: List<Song>,
         holder.title.text = title
         holder.artist.text = string
         holder.options.setOnClickListener { it ->
-            val menu = PopupMenu(holder.options.context, holder.options)
+            val menu = PopupMenu(mContext, holder.options)
             menu.inflate(R.menu.menu_song)
             menu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.details -> {
                         SongDetailDialog.create(song).show(fm, "SONG_DETAILS")
+                    }
+                    R.id.delete_from_device -> {
+                        mContext.showToast("Not yet implemented")
                     }
                 }
                 true
@@ -68,7 +74,7 @@ class SongAdapter(private val songList: List<Song>,
             mPlayer.setDataSource(path)
             mPlayer.prepare()
             mPlayer.start()
-            Toast.makeText(holder.itemView.context, "${song.title} by ${song.albumArtist} now playing!", Toast.LENGTH_LONG).show()
+            mContext.showToast("$title by $artist now playing!")
         }
 
         holder.itemView.setOnLongClickListener {
