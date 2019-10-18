@@ -91,7 +91,7 @@ class SongDetailDialog : DialogFragment() {
                     val header = file.audioHeader
                     val fileFormat = header.format
                     val fileChannels = header.channels
-                    val fileBirate = header.bitRate
+                    val fileBitrate = header.bitRate
                     val fileSampleRate = header.sampleRate
                     val fileLength = MusicUtils.getSongDuration(header.trackLength * 1000)
                     val fileSamples = numberFormat.format(header.noOfSamples)
@@ -119,7 +119,7 @@ class SongDetailDialog : DialogFragment() {
 
                     format.text = makeTextWithTitle(ctx, R.string.label_file_format, "$fileFormat ($isLossless)")
                     channels.text = makeTextWithTitle(ctx, R.string.label_file_channels, fileChannels)
-                    bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBirate kb/s ($bitRateType)")
+                    bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBitrate kb/s ($bitRateType)")
                     sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_samplerate, "$fileSampleRate Hz")
                     length.text = makeTextWithTitle(ctx, R.string.label_file_length, "$fileLength ($fileSamples samples)")
 
