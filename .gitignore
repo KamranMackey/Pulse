@@ -17,7 +17,7 @@ out/
 .gradle
 .gradle/
 build/
-:q
+
 # Signing files
 .signing/
 
