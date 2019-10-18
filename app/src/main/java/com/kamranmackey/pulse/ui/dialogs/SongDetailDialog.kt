@@ -39,7 +39,7 @@ class SongDetailDialog : DialogFragment() {
             NumberFormat.getInstance(resources.configuration.locale)
         }
 
-        val dialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.MATCH_PARENT))
+        val dialog = MaterialDialog(ctx, BottomSheet(LayoutMode.MATCH_PARENT))
             .show {
                 customView(R.layout.dialog_file_details, scrollable = true)
                 positiveButton(android.R.string.ok)
@@ -48,6 +48,7 @@ class SongDetailDialog : DialogFragment() {
 
         val view = dialog.getCustomView()
 
+        // File Fields
         val name: TextView = view.findViewById(R.id.fileName)
         val path: TextView = view.findViewById(R.id.filePath)
         val size: TextView = view.findViewById(R.id.fileSize)
@@ -57,7 +58,7 @@ class SongDetailDialog : DialogFragment() {
         val sampleRate: TextView = view.findViewById(R.id.fileSampleRate)
         val length: TextView = view.findViewById(R.id.fileLength)
         val comment: TextView = view.findViewById(R.id.fileEncoder)
-
+        // Song Fields
         val title: TextView = view.findViewById(R.id.songTitle)
         val artist: TextView = view.findViewById(R.id.songArtist)
         val album: TextView = view.findViewById(R.id.songAlbum)
