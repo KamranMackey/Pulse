@@ -16,7 +16,7 @@ import com.kamranmackey.pulse.backend.models.Song
 import com.kamranmackey.pulse.ui.dialogs.SongDetailDialog
 import com.kamranmackey.pulse.utils.extensions.showToast
 
-class SongAdapter(private val songList: ArrayList<Song>,
+class SongAdapter(private val songs: ArrayList<Song>,
                   private val fm: FragmentManager) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
     private lateinit var mContext: Context
@@ -39,7 +39,7 @@ class SongAdapter(private val songList: ArrayList<Song>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val song = songList[position]
+        val song = songs[position]
         val string = SpannableStringBuilder()
 
         val title = song.title
@@ -82,5 +82,5 @@ class SongAdapter(private val songList: ArrayList<Song>,
         }
     }
 
-    override fun getItemCount(): Int = songList.size
+    override fun getItemCount(): Int = songs.size
 }

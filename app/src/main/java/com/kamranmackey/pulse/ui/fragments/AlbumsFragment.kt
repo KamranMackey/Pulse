@@ -65,8 +65,8 @@ class AlbumsFragment : Fragment() {
 
         if (cursor != null && cursor.count > 0) {
             while (cursor.moveToNext()) {
-                val id: String = cursor.getString(cursor.getColumnIndexOrThrow(BaseColumns._ID))
-                val albumId: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ID))
+                val id: Int = cursor.getInt(cursor.getColumnIndexOrThrow(BaseColumns._ID))
+                val albumId: Int = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ID))
                 val album: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM))
                 val artist: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST))
                 val tracks: Int = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS))

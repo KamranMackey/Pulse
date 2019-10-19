@@ -25,6 +25,7 @@
     <string name="label_file_format_algorithm">File Format Algorithm</string>
     <string name="label_file_samplerate">File Sample Rate</string>
     <string name="label_file_length">File Length</string>
+    <string name="label_file_samples">File Samples</string>
     <string name="label_file_encoder">File Encoder</string>
 
     <!-- Detail Dialog Headers -->
@@ -34,6 +35,7 @@
     <!-- Song Metadata Labels -->
     <string name="label_song_title">Song Title</string>
     <string name="label_song_artist">Song Artist</string>
+    <string name="label_song_composer">Song Composer(s)</string>
     <string name="label_song_album">Song Album</string>
     <string name="label_song_year">Song Year</string>
 

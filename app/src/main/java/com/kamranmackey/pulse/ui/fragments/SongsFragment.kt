@@ -27,7 +27,7 @@ import android.os.IBinder
 
 class SongsFragment : Fragment() {
 
-    private val songList = ArrayList<Song>()
+    private val songs = ArrayList<Song>()
 
     private lateinit var player: PlayerService
 
@@ -56,7 +56,7 @@ class SongsFragment : Fragment() {
         mManager = fragmentManager as FragmentManager
 
         recyclerView = view.findViewById(R.id.songRecyclerView)
-        mAdapter = SongAdapter(songList, mManager)
+        mAdapter = SongAdapter(songs, mManager)
         mContext = baseActivity
 
         val layoutManager: LayoutManager = LinearLayoutManager(mContext)
@@ -136,7 +136,7 @@ class SongsFragment : Fragment() {
                 val track: Int = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK))
                 val year: Int = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR))
                 val path: String = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
-                songList.add(Song(id, title, artist, album, albumArtist, track, year, path))
+                songs.add(Song(id, title, artist, album, albumArtist, track, year, path))
             }
             cursor.close()
             mAdapter.notifyDataSetChanged()
