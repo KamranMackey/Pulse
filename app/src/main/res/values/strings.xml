@@ -20,7 +20,9 @@
     <string name="label_file_size">File Size</string>
     <string name="label_file_channels">File Channels</string>
     <string name="label_file_bitrate">File Bitrate</string>
+    <string name="label_file_bitrate_type">File Bitrate Type</string>
     <string name="label_file_format">File Format</string>
+    <string name="label_file_format_algorithm">File Format Algorithm</string>
     <string name="label_file_samplerate">File Sample Rate</string>
     <string name="label_file_length">File Length</string>
     <string name="label_file_encoder">File Encoder</string>

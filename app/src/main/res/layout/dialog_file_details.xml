@@ -52,6 +52,15 @@
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/fileFormatAlgorithm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="16dp"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fileChannels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,6 +71,15 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fileBitrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="16dp"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/fileBitrateType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="24dp"

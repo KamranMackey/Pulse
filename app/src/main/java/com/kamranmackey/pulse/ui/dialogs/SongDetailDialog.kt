@@ -53,8 +53,10 @@ class SongDetailDialog : DialogFragment() {
         val path: TextView = view.findViewById(R.id.filePath)
         val size: TextView = view.findViewById(R.id.fileSize)
         val format: TextView = view.findViewById(R.id.fileFormat)
+        val formatAlgorithm: TextView = view.findViewById(R.id.fileFormatAlgorithm)
         val channels: TextView = view.findViewById(R.id.fileChannels)
         val bitrate: TextView = view.findViewById(R.id.fileBitrate)
+        val bitrateType: TextView = view.findViewById(R.id.fileBitrateType)
         val sampleRate: TextView = view.findViewById(R.id.fileSampleRate)
         val length: TextView = view.findViewById(R.id.fileLength)
         val comment: TextView = view.findViewById(R.id.fileEncoder)
@@ -68,8 +70,10 @@ class SongDetailDialog : DialogFragment() {
         path.text = makeTextWithTitle(ctx, R.string.label_file_path, "-")
         size.text = makeTextWithTitle(ctx, R.string.label_file_size, "-")
         format.text = makeTextWithTitle(ctx, R.string.label_file_format, "-")
+        formatAlgorithm.text = makeTextWithTitle(ctx, R.string.label_file_format_algorithm, "-")
         channels.text = makeTextWithTitle(ctx, R.string.label_file_channels, "-")
         bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "-")
+        bitrateType.text = makeTextWithTitle(ctx, R.string.label_file_bitrate_type, "-")
         sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_samplerate, "-")
         length.text = makeTextWithTitle(ctx, R.string.label_file_length, "-")
         comment.text = makeTextWithTitle(ctx, R.string.label_file_encoder, "-")
@@ -90,8 +94,10 @@ class SongDetailDialog : DialogFragment() {
                     val tag: Tag = file.tag
                     val header = file.audioHeader
                     val fileFormat = header.format
+                    val fileFormatAlgorithm = if (header.isLossless) "Lossless" else "Lossy"
                     val fileChannels = header.channels
                     val fileBitrate = header.bitRate
+                    val fileBitrateType = if (header.isVariableBitRate) "Variable" else "Constant"
                     val fileSampleRate = header.sampleRate
                     val fileLength = MusicUtils.getSongDuration(header.trackLength * 1000)
                     val fileSamples = numberFormat.format(header.noOfSamples)
@@ -102,24 +108,11 @@ class SongDetailDialog : DialogFragment() {
                     val songAlbum = tag.getFirst(FieldKey.ALBUM).toString()
                     val songYear = tag.getFirst(FieldKey.YEAR).toString()
 
-                    val isLossless: String?
-                    val bitRateType: String?
-
-                    isLossless = if (header.isLossless) {
-                        "lossless codec"
-                    } else {
-                        "lossy codec"
-                    }
-
-                    bitRateType = if (header.isVariableBitRate) {
-                        "variable bitrate"
-                    } else {
-                        "constant bitrate"
-                    }
-
-                    format.text = makeTextWithTitle(ctx, R.string.label_file_format, "$fileFormat ($isLossless)")
+                    format.text = makeTextWithTitle(ctx, R.string.label_file_format, fileFormat)
+                    formatAlgorithm.text = makeTextWithTitle(ctx, R.string.label_file_format_algorithm, fileFormatAlgorithm)
                     channels.text = makeTextWithTitle(ctx, R.string.label_file_channels, fileChannels)
-                    bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBitrate kb/s ($bitRateType)")
+                    bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBitrate kb/s")
+                    bitrateType.text = makeTextWithTitle(ctx, R.string.label_file_bitrate_type, fileBitrateType)
                     sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_samplerate, "$fileSampleRate Hz")
                     length.text = makeTextWithTitle(ctx, R.string.label_file_length, "$fileLength ($fileSamples samples)")
 
