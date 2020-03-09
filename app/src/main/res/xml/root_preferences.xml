@@ -2,7 +2,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory app:iconSpaceReserved="false"
-        app:title="@string/audio_header">
+        app:title="@string/preferences_category_appearance_title">
+
+        <ListPreference
+            app:allowDividerBelow="true"
+            app:iconSpaceReserved="false"
+            app:title="@string/appearance_theme_title"
+            app:key="@string/appearance_theme_key"
+            app:summary="@string/appearance_theme_desc"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:iconSpaceReserved="false"
+        app:title="@string/preferences_category_audio_header_title">
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"

@@ -12,19 +12,15 @@
     android:paddingBottom="@dimen/row_padding_vertical">
 
     <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="@dimen/thumbnail"
-        android:layout_height="@dimen/thumbnail"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/album_thumbnail_desc"
-        android:layout_marginEnd="@dimen/row_padding_vertical" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/thumbnail"
         android:textColor="@color/title"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -33,8 +29,7 @@
         android:id="@+id/albumString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name"
-        android:layout_toEndOf="@id/thumbnail" />
+        android:layout_below="@id/name" />
 
     <TextView
         android:id="@+id/albumOptions"
@@ -46,7 +41,7 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/vertical_elipsis"
+        android:text="@string/horizontal_elipsis"
         android:textAppearance="?android:textAppearanceLarge"
         android:textSize="30sp"
         android:textStyle="bold" />

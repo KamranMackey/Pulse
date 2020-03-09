@@ -8,13 +8,18 @@ import android.graphics.Bitmap
 import androidx.recyclerview.widget.RecyclerView
 import android.content.ContentResolver
 import android.os.Build
-import android.annotation.TargetApi
+import android.content.ContentUris
 import android.graphics.ImageDecoder
-import androidx.annotation.NonNull
 import java.io.IOException
 
 
 object MusicUtils {
+
+    fun getAlbumArtFromMediaStore(mediaId: Long, context: Context): Bitmap {
+        val uri: Uri = Uri.parse("content://media/external/audio/albumart")
+        val contentUri = ContentUris.withAppendedId(uri, mediaId);
+        return MediaStore.Images.Media.getBitmap(context.contentResolver, contentUri)
+    }
 
     fun getSongDuration(songDurationMillis: Int): String {
         var minutes = songDurationMillis / 1000 / 60

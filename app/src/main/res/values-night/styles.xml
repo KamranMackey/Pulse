@@ -2,13 +2,15 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="roundSelector">@drawable/round_selector</item>
 
+        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+
         <!-- Material Dialogs -->
-        <item name="md_color_button_text">@color/colorAccent</item>
+        <item name="md_color_button_text">@color/dialogButtonColorWhite</item>
         <item name="md_button_casing">literal</item>
         <item name="md_corner_radius">8dp</item>
         <item name="md_ripple_color">#81D4FA</item>
@@ -16,6 +18,12 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:radius">8dp</item>
     </style>
 
     <style name="OverFlowButton">

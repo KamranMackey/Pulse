@@ -23,6 +23,7 @@ import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
 import org.jaudiotagger.tag.FieldKey
 import org.jaudiotagger.tag.Tag
+import org.jaudiotagger.tag.TagField
 import java.io.File
 import java.text.NumberFormat
 
@@ -31,9 +32,8 @@ class SongDetailDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val ctx: Context = requireContext()
         val song = arguments!!.getParcelable<Song>("song")
-        var numberFormat: NumberFormat? = null
 
-        numberFormat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        val numberFormat: NumberFormat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NumberFormat.getInstance(resources.configuration.locales.get(0))
         } else {
             NumberFormat.getInstance(resources.configuration.locale)
@@ -94,7 +94,7 @@ class SongDetailDialog : DialogFragment() {
                 size.text = makeTextWithTitle(ctx, R.string.label_file_size, getFileSizeString(songFile.length()))
                 try {
                     val file = AudioFileIO.read(songFile)
-                    val tag: Tag = file.tag
+                    val tag = file.tag
                     val header = file.audioHeader
                     val fileFormat = header.format
                     val fileFormatAlgorithm = if (header.isLossless) "Lossless" else "Lossy"
@@ -112,12 +112,11 @@ class SongDetailDialog : DialogFragment() {
                         encoder.text = makeTextWithTitle(ctx, R.string.label_file_encoder, fileEncoder)
                     }
 
-
                     val songTitle = tag.getFirst(FieldKey.TITLE).toString()
                     val songArtist = tag.getFirst(FieldKey.ARTIST).toString()
                     val songComposer = tag.getAll(FieldKey.COMPOSER).joinToString(", ")
-                    val songAlbum = tag.getFirst(FieldKey.ALBUM).toString()
-                    val songYear = tag.getFirst(FieldKey.YEAR).toString()
+                    val songAlbum: String = tag.getFirst(FieldKey.ALBUM)
+                    val songYear: String = tag.getFirst(FieldKey.YEAR)
 
                     format.text = makeTextWithTitle(ctx, R.string.label_file_format, fileFormat)
                     formatAlgorithm.text = makeTextWithTitle(ctx, R.string.label_file_format_algorithm, fileFormatAlgorithm)
@@ -140,8 +139,6 @@ class SongDetailDialog : DialogFragment() {
                     album.text = makeTextWithTitle(ctx, R.string.label_song_album, songAlbum)
                     year.text = makeTextWithTitle(ctx, R.string.label_song_year, songYear)
 
-                    Log.e("Song Details Dialog", tag.fields.toString())
-
                 } catch (@NonNull e: CannotReadException) {
                     Log.e("Audio File Read Error", "Could not read file", e)
                 }
@@ -161,6 +158,7 @@ class SongDetailDialog : DialogFragment() {
             return dialog
         }
 
+        @Suppress("DEPRECATION")
         private fun makeTextWithTitle(context: Context, titleResId: Int, text: String?): Spanned {
             return Html.fromHtml("<b>" + context.resources.getString(titleResId) + ": " + "</b>" + text)
         }

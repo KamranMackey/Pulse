@@ -14,6 +14,9 @@
     <string name="title_album_details">Album details</string> <!-- For future use. -->
     <string name="title_delete_from_device">Delete from device</string>
 
+    <string name="horizontal_elipsis">⋯</string>
+    <string name="album_thumbnail_desc">Album thumbnail</string>
+
     <!-- File Metadata Labels -->
     <string name="label_file_name">File Name</string>
     <string name="label_file_path">File Path</string>
@@ -42,11 +45,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Preferences -->
-    <string name="audio_header">Audio Settings</string>
+    <!-- Preference Headers -->
+    <string name="preferences_category_audio_header_title">Audio Settings</string>
+    <string name="preferences_category_appearance_title">Appearance</string>
+    <!-- Preference Titles -->
+    <!-- Audio -->
     <string name="gapless_playback_key">gapless_playback</string>
     <string name="gapless_playback_title">Gapless Playback</string>
     <string name="gapless_playback_desc">Enable continuous music playback. May cause issues on certain devices.</string>
+    <!-- Appearance -->
+    <string name="appearance_theme_key">appearance_theme</string>
+    <string name="appearance_theme_dialog_message">Please select an app theme. The default theme is Light.</string>
+    <string name="appearance_theme_title">Theme</string>
+    <string name="appearance_theme_desc">Change the app\'s current display theme.</string>
 
-    <string name="vertical_elipsis">⋮</string>
-    <string name="album_thumbnail_desc">Album thumbnail</string>
+    <!-- Services -->
+    <!-- Media Playback Service -->
+    <string name="service_media_playback_label">Media Playback Service</string>
+    <string name="service_media_playback_desc">Manages and controls Pulse\'s media playback.</string>
 </resources>

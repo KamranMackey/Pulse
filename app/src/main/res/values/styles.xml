@@ -7,8 +7,10 @@
 
         <item name="roundSelector">@drawable/round_selector</item>
 
+        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+
         <!-- Material Dialogs -->
-        <item name="md_color_button_text">@color/colorAccent</item>
+        <item name="md_color_button_text">@color/dialogButtonColorBlack</item>
         <item name="md_button_casing">literal</item>
         <item name="md_corner_radius">8dp</item>
         <item name="md_ripple_color">#81D4FA</item>
@@ -16,6 +18,11 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="PreferenceTheme" parent="@style/AppTheme">

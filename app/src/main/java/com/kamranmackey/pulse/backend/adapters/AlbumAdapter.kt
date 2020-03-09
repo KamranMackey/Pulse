@@ -22,8 +22,11 @@ class AlbumAdapter(private val albums: ArrayList<Album>): RecyclerView.Adapter<A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.album_list_row, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.album_list_row,
+            parent,
+            false
+        )
 
         context = parent.context
 
@@ -44,7 +47,7 @@ class AlbumAdapter(private val albums: ArrayList<Album>): RecyclerView.Adapter<A
             "song"
         }
 
-        string.append(artist).append(" • ").append("$tracks $songString")
+        string.append("$artist • $tracks $songString")
 
         holder.title.text = title
         holder.albumString.text = string
