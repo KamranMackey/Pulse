@@ -56,7 +56,10 @@ object MusicUtils {
         }
     }
 
-    fun deleteSongFromDevice(position: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+    fun deleteSongFromDevice(
+        position: Int,
+        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    ) {
 
     }
 

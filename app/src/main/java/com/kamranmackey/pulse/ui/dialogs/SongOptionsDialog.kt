@@ -11,11 +11,13 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.kamranmackey.pulse.R
-import com.kamranmackey.pulse.backend.models.Song
+import com.kamranmackey.pulse.backend.model.Song
 import com.kamranmackey.pulse.utils.extensions.showToast
 
-class SongOptionsDialog(private val song: Song,
-                        private val fm: FragmentManager) : DialogFragment() {
+class SongOptionsDialog(
+    private val song: Song,
+    private val fm: FragmentManager
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()

@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamranmackey.pulse.R
-import com.kamranmackey.pulse.backend.adapters.AlbumAdapter
-import com.kamranmackey.pulse.backend.models.Album
+import com.kamranmackey.pulse.backend.adapter.AlbumAdapter
+import com.kamranmackey.pulse.backend.model.Album
 import com.kamranmackey.pulse.utils.extensions.baseActivity
 import java.util.*
 
@@ -32,9 +32,11 @@ class AlbumsFragment : Fragment() {
         fun newInstance() = AlbumsFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.albums_fragment, container, false)
     }
 
@@ -64,10 +66,14 @@ class AlbumsFragment : Fragment() {
         if (cursor != null && cursor.count > 0) {
             while (cursor.moveToNext()) {
                 val id: Int = cursor.getInt(cursor.getColumnIndexOrThrow(BaseColumns._ID))
-                val albumId: Int = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ID))
-                val album: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM))
-                val artist: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST))
-                val tracks: Int = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS))
+                val albumId: Int =
+                    cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ID))
+                val album: String =
+                    cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM))
+                val artist: String =
+                    cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST))
+                val tracks: Int =
+                    cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS))
                 albums.add(Album(id, albumId, album, artist, tracks))
             }
             cursor.close()

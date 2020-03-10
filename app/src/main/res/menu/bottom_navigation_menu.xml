@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/action_songs"
+    <item
         android:id="@+id/action_songs"
-        android:icon="@drawable/ic_music_note" />
+        android:icon="@drawable/ic_music_note"
+        android:title="@string/action_songs" />
 
-    <item android:title="@string/action_albums"
+    <item
         android:id="@+id/action_albums"
-        android:icon="@drawable/ic_album" />
+        android:icon="@drawable/ic_album"
+        android:title="@string/action_albums" />
 
-    <item android:title="@string/action_search"
+    <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_search" />
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search" />
 
-    <item android:title="@string/action_playlists"
+    <item
         android:id="@+id/action_playlists"
-        android:icon="@drawable/ic_queue_music" />
+        android:icon="@drawable/ic_queue_music"
+        android:title="@string/action_playlists" />
 
-    <item android:title="@string/action_settings"
+    <item
+        android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings"
-        android:id="@+id/action_settings" />
+        android:title="@string/action_settings" />
 
 </menu>

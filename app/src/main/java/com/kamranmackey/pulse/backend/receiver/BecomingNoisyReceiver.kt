@@ -1,12 +1,12 @@
-package com.kamranmackey.pulse.backend.receivers
+package com.kamranmackey.pulse.backend.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.kamranmackey.pulse.backend.models.PlaybackStatus
-import com.kamranmackey.pulse.backend.services.PlayerService
+import com.kamranmackey.pulse.backend.model.PlaybackStatus
+import com.kamranmackey.pulse.backend.service.PlayerService
 
-class BecomingNoisyReceiver: BroadcastReceiver() {
+class BecomingNoisyReceiver : BroadcastReceiver() {
 
     private val mPlayerService: PlayerService = PlayerService()
 

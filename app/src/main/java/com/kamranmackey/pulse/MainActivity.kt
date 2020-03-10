@@ -21,22 +21,25 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var mBinding: ActivityMainBinding
+    private var mNotificationManager: NotificationManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
         createNotificationChannel() // create notification channel
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setContentView(mBinding.root)
+        setSupportActionBar(mBinding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val navigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(this)
 
-        binding.toolbarTitle.text = getString(R.string.action_songs)
-        binding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
-        binding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
+        mNotificationManager = getSystemService(NotificationManager::class.java) as NotificationManager
+
+        mBinding.toolbarTitle.text = getString(R.string.action_songs)
+        mBinding.toolbarTitle.setOnClickListener { showToast("Hello Title") }
+        mBinding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -87,14 +90,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun createNotificationChannel() {
         val name: CharSequence = "Media Playback"
         val description = "Playback notification used to control the playback of media."
-        val importance: Int = NotificationManager.IMPORTANCE_DEFAULT
+        val importance: Int = NotificationManager.IMPORTANCE_HIGH
         val channel = NotificationChannel("com.kamranmackey.pulse.playback", name, importance)
         channel.description = description
         channel.setSound(null, null)
         channel.enableVibration(false)
         channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-        val notificationManager: NotificationManager? =
-            getSystemService(NotificationManager::class.java)
-        notificationManager?.createNotificationChannel(channel)
+        if (mNotificationManager != null) {
+            mNotificationManager!!.createNotificationChannel(channel)
+        }
     }
 }

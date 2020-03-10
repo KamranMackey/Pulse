@@ -1,21 +1,30 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:iconSpaceReserved="false"
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:title="@string/preferences_category_appearance_title">
 
         <ListPreference
             app:allowDividerBelow="true"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
             app:iconSpaceReserved="false"
-            app:title="@string/appearance_theme_title"
             app:key="@string/appearance_theme_key"
             app:summary="@string/appearance_theme_desc"
-            app:entries="@array/theme_entries"
-            app:entryValues="@array/theme_values" />
+            app:title="@string/appearance_theme_title" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:iconSpaceReserved="false"
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:title="@string/preferences_category_audio_header_title">
+
+        <Preference
+            app:allowDividerBelow="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/equalizer_key"
+            app:summary="@string/equalizer_desc"
+            app:title="@string/equalizer_title" />
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"

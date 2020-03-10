@@ -1,10 +1,9 @@
-package com.kamranmackey.pulse.backend.adapters
+package com.kamranmackey.pulse.backend.adapter
 
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.media.MediaPlayer
 import android.os.IBinder
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -14,22 +13,31 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import coil.transform.RoundedCornersTransformation
 import com.kamranmackey.pulse.R
-import com.kamranmackey.pulse.backend.models.Song
-import com.kamranmackey.pulse.backend.services.PlayerService
+import com.kamranmackey.pulse.backend.model.Song
+import com.kamranmackey.pulse.backend.service.PlayerService
 import com.kamranmackey.pulse.ui.dialogs.SongOptionsDialog
 import com.kamranmackey.pulse.utils.MusicUtils
 import com.kamranmackey.pulse.utils.StorageUtils
 import com.kamranmackey.pulse.utils.extensions.showToast
 
-class SongAdapter(private val songs: ArrayList<Song>,
-                  private val fm: FragmentManager) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(
+    private val songs: List<Song>,
+    private val fm: FragmentManager
+) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
     private lateinit var mContext: Context
-    private lateinit var mPlayer: MediaPlayer
 
     private var bPlayerServiceBound: Boolean = false
     private lateinit var mPlayerService: PlayerService
+
+    init {
+        this.run {
+            setHasStableIds(true)
+        }
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var title: TextView = view.findViewById(R.id.title)
@@ -56,7 +64,6 @@ class SongAdapter(private val songs: ArrayList<Song>,
             .inflate(R.layout.song_list_row, parent, false)
 
         mContext = parent.context
-        mPlayer = MediaPlayer()
         mPlayerService = PlayerService()
 
         return ViewHolder(itemView)
@@ -87,7 +94,7 @@ class SongAdapter(private val songs: ArrayList<Song>,
 
         val title = song.title
         val id = song.albumId
-        val artist = song.albumArtist
+        val artist = song.artist
         val album = song.album
 
         string.append("$artist • $album")
@@ -99,7 +106,17 @@ class SongAdapter(private val songs: ArrayList<Song>,
             songOptionsDialog.show(fm, songOptionsDialog.tag)
         }
 
-        holder.art.setImageBitmap(MusicUtils.getAlbumArtFromMediaStore(id, mContext))
+        holder.art.load(MusicUtils.getAlbumArtFromMediaStore(id, mContext)) {
+            crossfade(true)
+            transformations(
+                RoundedCornersTransformation(
+                    topLeft = 4f,
+                    topRight = 4f,
+                    bottomLeft = 4f,
+                    bottomRight = 4f
+                )
+            )
+        }
 
         holder.itemView.setOnClickListener {
             playSelectedMedia(holder.adapterPosition)

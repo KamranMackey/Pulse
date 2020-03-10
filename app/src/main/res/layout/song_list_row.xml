@@ -6,10 +6,10 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/row_padding_vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+    android:paddingBottom="@dimen/row_padding_vertical">
 
     <ImageView
         android:id="@+id/thumbnail"
@@ -21,20 +21,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/thumbnail">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:textColor="@color/title"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/artist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,20 +42,19 @@
 
     </RelativeLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songOptions"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:text="@string/horizontal_elipsis"
-        android:tooltipText="@string/song_options_title"
+        android:textAppearance="?android:textAppearanceLarge"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:textAppearanceLarge" />
+        android:textStyle="bold" />
 
 </RelativeLayout>

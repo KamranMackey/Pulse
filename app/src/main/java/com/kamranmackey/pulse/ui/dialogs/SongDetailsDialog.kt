@@ -17,7 +17,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.kamranmackey.pulse.R
-import com.kamranmackey.pulse.backend.models.Song
+import com.kamranmackey.pulse.backend.model.Song
 import com.kamranmackey.pulse.utils.MusicUtils
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
@@ -73,7 +73,7 @@ class SongDetailsDialog : DialogFragment() {
         channels.text = makeTextWithTitle(ctx, R.string.label_file_channels, "-")
         bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "-")
         bitrateType.text = makeTextWithTitle(ctx, R.string.label_file_bitrate_type, "-")
-        sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_samplerate, "-")
+        sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_sample_rate, "-")
         length.text = makeTextWithTitle(ctx, R.string.label_file_length, "-")
         samples.text = makeTextWithTitle(ctx, R.string.label_file_samples, "-")
         encoder.text = makeTextWithTitle(ctx, R.string.label_file_encoder, "-")
@@ -89,7 +89,11 @@ class SongDetailsDialog : DialogFragment() {
             if (songFile.exists()) {
                 name.text = makeTextWithTitle(ctx, R.string.label_file_name, songFile.name)
                 path.text = makeTextWithTitle(ctx, R.string.label_file_path, songFile.absolutePath)
-                size.text = makeTextWithTitle(ctx, R.string.label_file_size, getFileSizeString(songFile.length()))
+                size.text = makeTextWithTitle(
+                    ctx,
+                    R.string.label_file_size,
+                    getFileSizeString(songFile.length())
+                )
                 try {
                     val file = AudioFileIO.read(songFile)
                     val tag = file.tag
@@ -107,7 +111,8 @@ class SongDetailsDialog : DialogFragment() {
                     if (fileEncoder.isEmpty()) {
                         encoder.visibility = View.GONE
                     } else {
-                        encoder.text = makeTextWithTitle(ctx, R.string.label_file_encoder, fileEncoder)
+                        encoder.text =
+                            makeTextWithTitle(ctx, R.string.label_file_encoder, fileEncoder)
                     }
 
                     val songTitle = tag.getFirst(FieldKey.TITLE).toString()
@@ -117,13 +122,22 @@ class SongDetailsDialog : DialogFragment() {
                     val songYear: String = tag.getFirst(FieldKey.YEAR)
 
                     format.text = makeTextWithTitle(ctx, R.string.label_file_format, fileFormat)
-                    formatAlgorithm.text = makeTextWithTitle(ctx, R.string.label_file_format_algorithm, fileFormatAlgorithm)
-                    channels.text = makeTextWithTitle(ctx, R.string.label_file_channels, fileChannels)
-                    bitrate.text = makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBitrate kb/s")
-                    bitrateType.text = makeTextWithTitle(ctx, R.string.label_file_bitrate_type, fileBitrateType)
-                    sampleRate.text = makeTextWithTitle(ctx, R.string.label_file_samplerate, "$fileSampleRate Hz")
+                    formatAlgorithm.text = makeTextWithTitle(
+                        ctx,
+                        R.string.label_file_format_algorithm,
+                        fileFormatAlgorithm
+                    )
+                    channels.text =
+                        makeTextWithTitle(ctx, R.string.label_file_channels, fileChannels)
+                    bitrate.text =
+                        makeTextWithTitle(ctx, R.string.label_file_bitrate, "$fileBitrate kb/s")
+                    bitrateType.text =
+                        makeTextWithTitle(ctx, R.string.label_file_bitrate_type, fileBitrateType)
+                    sampleRate.text =
+                        makeTextWithTitle(ctx, R.string.label_file_sample_rate, "$fileSampleRate Hz")
                     length.text = makeTextWithTitle(ctx, R.string.label_file_length, fileLength)
-                    samples.text = makeTextWithTitle(ctx, R.string.label_file_samples, "$fileSamples samples")
+                    samples.text =
+                        makeTextWithTitle(ctx, R.string.label_file_samples, "$fileSamples samples")
 
                     title.text = makeTextWithTitle(ctx, R.string.label_song_title, songTitle)
                     artist.text = makeTextWithTitle(ctx, R.string.label_song_artist, songArtist)
@@ -131,7 +145,8 @@ class SongDetailsDialog : DialogFragment() {
                     if (songComposer.isEmpty()) {
                         composer.visibility = View.GONE
                     } else {
-                        composer.text = makeTextWithTitle(ctx, R.string.label_song_composer, songComposer)
+                        composer.text =
+                            makeTextWithTitle(ctx, R.string.label_song_composer, songComposer)
                     }
 
                     album.text = makeTextWithTitle(ctx, R.string.label_song_album, songAlbum)

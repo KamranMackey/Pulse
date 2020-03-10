@@ -4,18 +4,18 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.kamranmackey.pulse.backend.models.Song
+import com.kamranmackey.pulse.backend.model.Song
 
 class StorageUtils(var context: Context) {
     private val storage = "com.kamranmackey.pulse.STORAGE"
     private var preferences: SharedPreferences? = null
 
-    fun storeAudio(arrayList: ArrayList<Song>) {
+    fun storeAudio(list: List<Song>) {
         preferences = context.getSharedPreferences(storage, Context.MODE_PRIVATE)
 
         val editor = preferences!!.edit()
         val gson = Gson()
-        val json = gson.toJson(arrayList)
+        val json = gson.toJson(list)
         editor.putString("audioArrayList", json)
         editor.apply()
     }
@@ -25,7 +25,7 @@ class StorageUtils(var context: Context) {
         val gson = Gson()
         val json = preferences!!.getString("audioArrayList", null)
         val type = object : TypeToken<ArrayList<Song>>() {}.type
-        return gson.fromJson<ArrayList<Song>>(json, type)
+        return gson.fromJson(json, type)
     }
 
     fun storeAudioIndex(index: Int) {

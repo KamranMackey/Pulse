@@ -27,7 +27,7 @@
     <string name="label_file_bitrate_type">File Bitrate Type</string>
     <string name="label_file_format">File Format</string>
     <string name="label_file_format_algorithm">File Format Algorithm</string>
-    <string name="label_file_samplerate">File Sample Rate</string>
+    <string name="label_file_sample_rate">File Sample Rate</string>
     <string name="label_file_length">File Length</string>
     <string name="label_file_samples">File Samples</string>
     <string name="label_file_encoder">File Encoder</string>
@@ -51,6 +51,9 @@
     <string name="preferences_category_appearance_title">Appearance</string>
     <!-- Preference Titles -->
     <!-- Audio -->
+    <string name="equalizer_key">equalizer</string>
+    <string name="equalizer_title">Equalizer</string>
+    <string name="equalizer_desc">Opens the native Android equalizer. Still a work in progress.</string>
     <string name="gapless_playback_key">gapless_playback</string>
     <string name="gapless_playback_title">Gapless Playback</string>
     <string name="gapless_playback_desc">Enable continuous music playback. May cause issues on certain devices.</string>

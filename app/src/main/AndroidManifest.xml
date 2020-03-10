@@ -36,16 +36,15 @@
         </activity>
 
         <receiver
-            android:name=".backend.receivers.BecomingNoisyReceiver"
-            android:enabled="true"
-            android:exported="true" />
+            android:name=".backend.receiver.BecomingNoisyReceiver"
+            android:enabled="true" />
 
         <service
-            android:name=".backend.services.PlayerService"
+            android:name=".backend.service.PlayerService"
             android:description="@string/service_media_playback_desc"
             android:enabled="true"
-            android:exported="true"
-            android:label="@string/service_media_playback_label">
+            android:label="@string/service_media_playback_label"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
