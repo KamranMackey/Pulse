@@ -2,9 +2,8 @@ package com.kamranmackey.pulse.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-
-import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.kamranmackey.pulse.backend.models.Song
 
 class StorageUtils(var context: Context) {

@@ -53,6 +53,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:text="@string/horizontal_elipsis"
+        android:tooltipText="@string/song_options_title"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textAppearance="?android:textAppearanceLarge" />

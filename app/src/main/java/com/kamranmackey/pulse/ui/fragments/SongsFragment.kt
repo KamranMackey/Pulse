@@ -1,15 +1,14 @@
 package com.kamranmackey.pulse.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.*
+import android.content.ContentResolver
+import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.os.IBinder
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DefaultItemAnimator

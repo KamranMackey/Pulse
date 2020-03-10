@@ -1,16 +1,16 @@
 package com.kamranmackey.pulse.utils
 
-import android.content.Context
-import android.net.Uri
-import java.util.*
-import android.provider.MediaStore
-import android.graphics.Bitmap
-import androidx.recyclerview.widget.RecyclerView
 import android.content.ContentResolver
-import android.os.Build
 import android.content.ContentUris
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
+import androidx.recyclerview.widget.RecyclerView
 import java.io.IOException
+import java.util.*
 
 
 object MusicUtils {

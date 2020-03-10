@@ -17,7 +17,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -80,7 +80,7 @@ dependencies {
     implementation('com.afollestad.material-dialogs:core:3.3.0')
     implementation('com.afollestad.material-dialogs:bottomsheets:3.3.0')
     implementation('io.coil-kt:coil:0.9.5')
-    implementation("io.reactivex.rxjava2:rxjava:2.2.18")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
     implementation("com.github.goxr3plus:jaudiotagger:2.2.7")
 
     // Testing dependencies

@@ -7,20 +7,17 @@ import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.os.IBinder
 import android.text.SpannableStringBuilder
-import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamranmackey.pulse.R
 import com.kamranmackey.pulse.backend.models.Song
 import com.kamranmackey.pulse.backend.services.PlayerService
-import com.kamranmackey.pulse.ui.dialogs.SongDetailDialog
+import com.kamranmackey.pulse.ui.dialogs.SongOptionsDialog
 import com.kamranmackey.pulse.utils.MusicUtils
 import com.kamranmackey.pulse.utils.StorageUtils
 import com.kamranmackey.pulse.utils.extensions.showToast
@@ -97,22 +94,9 @@ class SongAdapter(private val songs: ArrayList<Song>,
 
         holder.title.text = title
         holder.artist.text = string
-        holder.options.setOnClickListener { it ->
-            val menu = PopupMenu(mContext, holder.options)
-            menu.inflate(R.menu.menu_song)
-            menu.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.details -> {
-                        SongDetailDialog.create(song).show(fm, "SONG_DETAILS")
-                    }
-                    R.id.delete_from_device -> {
-                        mContext.showToast("Not yet implemented", Toast.LENGTH_SHORT)
-                    }
-                }
-                true
-            }
-            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            menu.show()
+        holder.options.setOnClickListener {
+            val songOptionsDialog = SongOptionsDialog(song, fm)
+            songOptionsDialog.show(fm, songOptionsDialog.tag)
         }
 
         holder.art.setImageBitmap(MusicUtils.getAlbumArtFromMediaStore(id, mContext))
@@ -122,7 +106,9 @@ class SongAdapter(private val songs: ArrayList<Song>,
         }
 
         holder.itemView.setOnLongClickListener {
-            it.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            val songOptionsDialog = SongOptionsDialog(song, fm)
+            songOptionsDialog.show(fm, songOptionsDialog.tag)
+            true
         }
     }
 

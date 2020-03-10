@@ -10,9 +10,10 @@
     <string name="action_about">About</string>
 
     <!-- Menu / Dialog Titles -->
-    <string name="title_song_details">Song details</string>
-    <string name="title_album_details">Album details</string> <!-- For future use. -->
-    <string name="title_delete_from_device">Delete from device</string>
+    <string name="song_options_title">Song Options</string>
+    <string name="dialog_song_options_details_title">Song Details</string>
+    <string name="dialog_song_options_delete_title">Delete from Device</string>
+    <string name="title_album_details">Album Details</string> <!-- For future use. -->
 
     <string name="horizontal_elipsis">⋯</string>
     <string name="album_thumbnail_desc">Album thumbnail</string>
@@ -63,4 +64,5 @@
     <!-- Media Playback Service -->
     <string name="service_media_playback_label">Media Playback Service</string>
     <string name="service_media_playback_desc">Manages and controls Pulse\'s media playback.</string>
+    <string name="song_details_dialog_info_icon_desc">Informational icon</string>
 </resources>
