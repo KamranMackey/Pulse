@@ -11,6 +11,7 @@ import android.content.IntentFilter
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
+import android.media.AudioManager.AUDIOFOCUS_GAIN
 import android.media.AudioManager.OnAudioFocusChangeListener
 import android.media.MediaPlayer
 import android.media.MediaPlayer.*
@@ -78,9 +79,7 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
     var activeSong: Song? = null
 
     @TargetApi(Build.VERSION_CODES.O)
-    private var focusRequest: AudioFocusRequest = AudioFocusRequest.Builder(
-        AudioManager.AUDIOFOCUS_GAIN
-    ).run {
+    private var focusRequest: AudioFocusRequest = AudioFocusRequest.Builder(AUDIOFOCUS_GAIN).run {
         setAudioAttributes(AudioAttributes.Builder().run {
             setUsage(AudioAttributes.USAGE_MEDIA)
             setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -126,7 +125,7 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
 
     override fun onAudioFocusChange(focusChange: Int) {
         when (focusChange) {
-            AudioManager.AUDIOFOCUS_GAIN -> {
+            AUDIOFOCUS_GAIN -> {
                 if (!mPlayer.isPlaying) {
                     mPlayer.start()
                 }
@@ -170,14 +169,13 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
     }
 
     private fun requestAudioFocus(): Boolean {
-        mManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mManager.requestAudioFocus(focusRequest)
         } else {
             mManager.requestAudioFocus(
                 this,
                 AudioManager.STREAM_MUSIC,
-                AudioManager.AUDIOFOCUS_GAIN
+                AUDIOFOCUS_GAIN
             )
         }
 
@@ -522,6 +520,9 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
 
     override fun onCreate() {
         super.onCreate()
+
+        mManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
         callStateListener()
         registerBecomingNoisyReceiver()
         registerAudioReceiver()
@@ -593,6 +594,11 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
 
     override fun onBind(intent: Intent): IBinder? {
         return iBinder
+    }
+
+    override fun onUnbind(intent: Intent?): Boolean {
+        removeNotification()
+        return super.onUnbind(intent)
     }
 
     inner class PlayerBinder : Binder() {

@@ -1,36 +1,26 @@
 package com.kamranmackey.pulse.ui.fragments
 
-import android.content.ContentResolver
 import android.content.Context
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.BaseColumns
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamranmackey.pulse.R
 import com.kamranmackey.pulse.backend.adapter.AlbumAdapter
+import com.kamranmackey.pulse.backend.loader.albums.AlbumLoader
 import com.kamranmackey.pulse.backend.model.Album
 import com.kamranmackey.pulse.utils.extensions.baseActivity
 import java.util.*
 
 class AlbumsFragment : Fragment() {
 
-    private val albums = ArrayList<Album>()
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var mAdapter: AlbumAdapter
+    private lateinit var mRecyclerView: RecyclerView
     private lateinit var mContext: Context
-
-    companion object {
-        fun newInstance() = AlbumsFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,43 +32,21 @@ class AlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        recyclerView = view.findViewById(R.id.albumRecyclerView)
-        mAdapter = AlbumAdapter(albums)
+        mRecyclerView = view.findViewById(R.id.albumRecyclerView)
         mContext = baseActivity
-
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(mContext)
-
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.setHasFixedSize(true)
-        recyclerView.isNestedScrollingEnabled = false
-        recyclerView.adapter = mAdapter
-
-        getAlbumData()
+        setupRecyclerView()
     }
 
-    private fun getAlbumData() {
-        val resolver: ContentResolver = baseActivity.contentResolver
-        val albumUri: Uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
-        val cursor: Cursor? = resolver.query(albumUri, null, null, null, null)
+    private fun setupRecyclerView() {
+        val albumList: List<Album> = AlbumLoader.getAllAlbums(mContext)
+        val albumAdapter = AlbumAdapter(albumList)
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(mContext)
 
-        if (cursor != null && cursor.count > 0) {
-            while (cursor.moveToNext()) {
-                val id: Int = cursor.getInt(cursor.getColumnIndexOrThrow(BaseColumns._ID))
-                val albumId: Int =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ID))
-                val album: String =
-                    cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM))
-                val artist: String =
-                    cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST))
-                val tracks: Int =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS))
-                albums.add(Album(id, albumId, album, artist, tracks))
-            }
-            cursor.close()
-            mAdapter.notifyDataSetChanged()
-        }
+        mRecyclerView.layoutManager = layoutManager
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.isNestedScrollingEnabled = false
+        mRecyclerView.adapter = albumAdapter
     }
 
 }
