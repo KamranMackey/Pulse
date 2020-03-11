@@ -50,12 +50,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mBinding.toolbarTitle.setOnLongClickListener { showToast("Hello Long Click") }
 
         mViewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 if (prevMenuItem != null) {
@@ -64,8 +59,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     mNavigationView.menu.getItem(0).isChecked = false
                 }
 
-                mNavigationView.menu.getItem(position).isChecked = true
                 toolbar_title.text = mNavigationView.menu.getItem(position).title
+                mNavigationView.menu.getItem(position).isChecked = true
 
                 prevMenuItem = mNavigationView.menu.getItem(position)
             }
@@ -108,18 +103,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
-
-//    private fun loadFragment(fragment: Fragment) {
-//        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.container, fragment)
-//        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//        transaction.setCustomAnimations(
-//            android.R.anim.fade_in,
-//            android.R.anim.fade_out
-//        )
-//        transaction.addToBackStack(null)
-//        transaction.commit()
-//    }
 
     private fun initializeViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager, 0)

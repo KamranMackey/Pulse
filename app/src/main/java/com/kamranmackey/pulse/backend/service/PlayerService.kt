@@ -46,6 +46,7 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
     private val mPackageName = "com.kamranmackey.pulse"
 
     private lateinit var mManager: AudioManager
+    private lateinit var mNotificationManager: NotificationManager
     private var mPlayer: MediaPlayer = MediaPlayer()
 
     private val notificationId: Int = 101
@@ -172,11 +173,7 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
         val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mManager.requestAudioFocus(focusRequest)
         } else {
-            mManager.requestAudioFocus(
-                this,
-                AudioManager.STREAM_MUSIC,
-                AUDIOFOCUS_GAIN
-            )
+            mManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AUDIOFOCUS_GAIN)
         }
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -239,16 +236,8 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
             NotificationCompat.Builder(this, "com.kamranmackey.pulse.playback").run {
                 setShowWhen(false)
                 setOngoing(true)
-                setStyle(MediaStyle().run {
-                    setMediaSession(mSession!!.sessionToken)
-                    setShowActionsInCompactView(0, 1, 2)
-                })
-                setLargeIcon(
-                    MusicUtils.getAlbumArtFromMediaStore(
-                        activeSong!!.albumId,
-                        applicationContext
-                    )
-                )
+                setStyle(MediaStyle().setMediaSession(mSession!!.sessionToken).setShowActionsInCompactView(0, 1, 2))
+                setLargeIcon(MusicUtils.getAlbumArtFromMediaStore(activeSong!!.albumId, applicationContext))
                 setSmallIcon(R.drawable.ic_music_note)
                 setContentText(activeSong!!.artist)
                 setContentTitle(activeSong!!.title)
@@ -263,16 +252,8 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
             NotificationCompat.Builder(this).run {
                 setShowWhen(false)
                 setOngoing(true)
-                setStyle(MediaStyle().run {
-                    setMediaSession(mSession!!.sessionToken)
-                    setShowActionsInCompactView(0, 1, 2)
-                })
-                setLargeIcon(
-                    MusicUtils.getAlbumArtFromMediaStore(
-                        activeSong!!.albumId,
-                        applicationContext
-                    )
-                )
+                setStyle(MediaStyle().setMediaSession(mSession!!.sessionToken).setShowActionsInCompactView(0, 1, 2))
+                setLargeIcon(MusicUtils.getAlbumArtFromMediaStore(activeSong!!.albumId, applicationContext))
                 setSmallIcon(R.drawable.ic_music_note)
                 setContentText(activeSong!!.artist)
                 setContentTitle(activeSong!!.title)
@@ -284,16 +265,11 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
             }
         }
 
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-            notificationId,
-            notificationBuilder.build()
-        )
+        mNotificationManager.notify(notificationId, notificationBuilder.build())
     }
 
     private fun removeNotification() {
-        val notificationManager: NotificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.cancel(notificationId)
+        mNotificationManager.cancel(notificationId)
     }
 
     private fun playbackAction(action: Int): PendingIntent {
@@ -522,6 +498,7 @@ class PlayerService : Service(), OnCompletionListener, OnPreparedListener, OnErr
         super.onCreate()
 
         mManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         callStateListener()
         registerBecomingNoisyReceiver()

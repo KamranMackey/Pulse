@@ -47,13 +47,7 @@ class AlbumLoader {
                 MediaStore.Audio.AlbumColumns.FIRST_YEAR
             )
 
-            return context.contentResolver.query(
-                uri,
-                columns,
-                null,
-                null,
-                order
-            )!!
+            return context.contentResolver.query(uri, columns, null, null, order)!!
         }
     }
 }
