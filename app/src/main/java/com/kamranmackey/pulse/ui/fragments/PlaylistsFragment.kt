@@ -7,7 +7,11 @@ import com.kamranmackey.pulse.R
 
 class PlaylistsFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_playlists, container, false)
         setHasOptionsMenu(true)
         return view

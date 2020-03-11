@@ -134,7 +134,11 @@ class SongDetailsDialog : DialogFragment() {
                     bitrateType.text =
                         makeTextWithTitle(ctx, R.string.label_file_bitrate_type, fileBitrateType)
                     sampleRate.text =
-                        makeTextWithTitle(ctx, R.string.label_file_sample_rate, "$fileSampleRate Hz")
+                        makeTextWithTitle(
+                            ctx,
+                            R.string.label_file_sample_rate,
+                            "$fileSampleRate Hz"
+                        )
                     length.text = makeTextWithTitle(ctx, R.string.label_file_length, fileLength)
                     samples.text =
                         makeTextWithTitle(ctx, R.string.label_file_samples, "$fileSamples samples")

@@ -26,7 +26,20 @@ class SongLoader {
                     val year: Int = cursor.getInt(7)
                     val albumId: Long = cursor.getLong(8)
                     val path: String = cursor.getString(9);
-                    songs.add(Song(id, albumId, artistId, name, artist, album, duration, year, trackNumber, path))
+                    songs.add(
+                        Song(
+                            id,
+                            albumId,
+                            artistId,
+                            name,
+                            artist,
+                            album,
+                            duration,
+                            year,
+                            trackNumber,
+                            path
+                        )
+                    )
                 } while (cursor.moveToNext())
             }
 

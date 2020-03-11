@@ -43,8 +43,8 @@
             android:name=".backend.service.PlayerService"
             android:description="@string/service_media_playback_desc"
             android:enabled="true"
-            android:label="@string/service_media_playback_label"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/service_media_playback_label">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
